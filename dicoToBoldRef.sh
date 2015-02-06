@@ -31,7 +31,7 @@ ${ANTsPATH}/antsRegistration -d 3 \
                             -t SyN[0.1,3,0] \
                             -f 6x4x2x1 \
                             -s 3x2x1x0 \
-                            -c [10x0x0x0,1e-8,10] 
+                            -c [100x100x80x40,1e-8,10] 
 
 # apply the inverse transform to the moving space
 ${ANTsPATH}/antsApplyTransforms -d 3 \
