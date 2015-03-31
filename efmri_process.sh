@@ -63,7 +63,9 @@ function stringUpAllBlocks
   fslsplit ${destDir}/T00_${i}_efmriblock${session}_dico_dico.nii.gz ${destDir}/chopping/block${session}_dico -t
 
   # delete the 11 volumes at the end 0104-0114
-  rm ${destDir}/chopping/block${session}_dico0104.nii.gz ${destDir}/chopping/block${session}_dico0105.nii.gz  ${destDir}/chopping/block${session}_dico0106.nii.gz  ${destDir}/chopping/block${session}_dico0107.nii.gz ${destDir}/chopping/block${session}_dico0108.nii.gz  ${destDir}/chopping/block${session}_dico0109.nii.gz  ${destDir}/chopping/block${session}_dico0110.nii.gz ${destDir}/chopping/block${session}_dico0111.nii.gz  ${destDir}/chopping/block${session}_dico0112.nii.gz  ${destDir}/chopping/block${session}_dico0113.nii.gz ${destDir}/chopping/block${session}_dico0114.nii.gz
+  #rm ${destDir}/chopping/block${session}_dico0104.nii.gz ${destDir}/chopping/block${session}_dico0105.nii.gz  ${destDir}/chopping/block${session}_dico0106.nii.gz  ${destDir}/chopping/block${session}_dico0107.nii.gz ${destDir}/chopping/block${session}_dico0108.nii.gz  ${destDir}/chopping/block${session}_dico0109.nii.gz  ${destDir}/chopping/block${session}_dico0110.nii.gz ${destDir}/chopping/block${session}_dico0111.nii.gz  ${destDir}/chopping/block${session}_dico0112.nii.gz  ${destDir}/chopping/block${session}_dico0113.nii.gz ${destDir}/chopping/block${session}_dico0114.nii.gz
+
+  rm ${destDir}/chopping/block${session}_dico0094.nii.gz ${destDir}/chopping/block${session}_dico0093.nii.gz  ${destDir}/chopping/block${session}_dico0092.nii.gz 
 
   fslmerge -t ${destDir}/chopping/block${session}_dico_11chopped.nii.gz ${destDir}/chopping/block${session}_dico0*
 
@@ -109,23 +111,25 @@ function setupDesignFile
   local id=$1
   local destinationDir=$2
 
-  sed "s/YHC03/${id}/g" ${destinationDir}/../YHC03/output/allBlocks_noZflipping_cVother.feat/design.fsf > ${destinationDir}/output/design.fsf
+  sed "s/YHC03/${id}/g" ${destinationDir}/../YHC03/output/allBlocks_noZflipping_daveContrastsPositiveNegative.feat/design.fsf > ${destinationDir}/output/design.fsf
   return
 }
 
-for id in YHC03;
+idList="YHC14"
+
+for id in $idList; 
 do
   destinationDir=/data/picsl/wujue/efMRI/${id}
   
   mkdir -p ${destinationDir}/output
   mkdir -p ${destinationDir}/chopping
   
-  collect_files $id $destinationDir
+  # collect_files $id $destinationDir
  
-  stringUpAllBlocksNoDico $id $destinationDir
+  # stringUpAllBlocks $id $destinationDir
 
   ### setupDesignFile first; 
-  setupDesignFile $id $destinationDir
+  # setupDesignFile $id $destinationDir
 
   feat ${destinationDir}/output/design.fsf
 

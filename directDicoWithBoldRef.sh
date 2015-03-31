@@ -8,22 +8,22 @@ root=/data/picsl/wujue/efMRI/
 sub=YHC$1
 
 fix="/home/srdas/wd/7T/long/${sub}/T00_${sub}_boldref.nii.gz"
-mov="${root}${sub}/registerWithBoldRef/example_func_time50.nii.gz"
+mov="${root}${sub}/output/allBlocks_noZflipping_daveContrastsPositiveNegativeNoDico.feat/mean_func.nii.gz"
 
 fixName="Boldref"
-movName="Dico"
+movName="DirectDico"
 
-outputPath=${root}/${sub}/registerWithBoldRef
+outputPath=${root}/${sub}/directDicoWithBoldRef
 
 mkdir $outputPath
 
 transform="Rigid"
 
-ln -s /home/srdas/wd/7T/long/${sub}/T00_${sub}_boldref.nii.gz ${root}${sub}/
+# ln -s /home/srdas/wd/7T/long/${sub}/T00_${sub}_boldref.nii.gz ${root}${sub}/
 
-fslroi ${root}${sub}/T00_${sub}_efmriblock1_dico_dico.nii.gz $mov 50 1
+# fslroi ${root}${sub}/T00_${sub}_efmriblock1_dico_dico.nii.gz $mov 50 1
 
-par="par4"
+par="par1"
 
 exe="${ANTsPATH}/antsRegistration -d 3 \
                             -r [${fix},${mov},1] \
